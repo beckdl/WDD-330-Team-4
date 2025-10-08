@@ -12,7 +12,7 @@ export default async function productDetails(productId) {
   document.getElementById("addToCart").addEventListener("click", addToCart);
 }
 
-function addProductToCart(product) {
+export function addProductToCart(product) {
     const currentCart = getLocalStorage("so-cart") || [];
     if (!Array.isArray(currentCart)) {
       setLocalStorage("so-cart", [product]);
