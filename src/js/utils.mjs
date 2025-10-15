@@ -42,3 +42,36 @@ export function renderListWithTemplate(
   const htmlString = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlString.join(""));
 }
+
+export function renderWithTemplate(
+  templateFn,
+  parentElement,
+  data,
+  position = "afterbegin",
+  clear = true
+) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  const htmlString = data.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlString.join(""));
+}
+
+export function loadTemplate(path) {
+  return async function () {
+        const res = await fetch(path);
+        if (res.ok) {
+        const html = await res.text();
+        return html;
+        }
+    };
+}
+
+export function loadHeaderFooter() {
+  const headerTemplateFn = loadTemplate("./partials/header.html");
+  const headerEl = document.querySelector("#main-header");
+  const footerTemplateFn = loadTemplate("./partials/footer.html");
+  const footerEl = document.querySelector("#main-footer");
+  renderWithTemplate(headerTemplateFn, headerEl);
+  renderWithTemplate(footerTemplateFn, footerEl);
+}
