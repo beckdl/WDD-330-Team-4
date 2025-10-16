@@ -43,18 +43,22 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlString.join(""));
 }
 
-export function renderWithTemplate(
+export async function renderWithTemplate(
   templateFn,
   parentElement,
   data,
+  callback,
   position = "afterbegin",
   clear = true
 ) {
   if (clear) {
     parentElement.innerHTML = "";
   }
-  const htmlString = data.map(templateFn);
-  parentElement.insertAdjacentHTML(position, htmlString.join(""));
+  const htmlString = await templateFn(data);
+  parentElement.insertAdjacentHTML(position, htmlString);
+  if (callback) {
+    callback(data);
+  }
 }
 
 export function loadTemplate(path) {
