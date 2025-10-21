@@ -1,4 +1,5 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { getLocalStorage, renderListWithTemplate } from "./utils.mjs";
+
 
 export function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
