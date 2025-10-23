@@ -9,14 +9,13 @@ export default async function productDetails(productId) {
   // once we have the product details we can render out the HTML
   renderProductDetails();
   // once the HTML is rendered we can add a listener to Add to Cart button
-  document.getElementById("addToCart").addEventListener("click", addToCart);
+  document.getElementById("addToCart").addEventListener("click", addProductToCart(product));
 }
 
 export function addProductToCart(product) {
-    const currentCart = getLocalStorage("so-cart") || [];
-    if (!Array.isArray(currentCart)) {
-      setLocalStorage("so-cart", [product]);
-      return;
+    const currentCart = getLocalStorage("so-cart");
+    if (!currentCart) {
+        currentCart = [];
     }
     currentCart.push(product);
     setLocalStorage("so-cart", currentCart);
