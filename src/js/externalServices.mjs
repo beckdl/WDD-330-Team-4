@@ -8,7 +8,7 @@ function convertToJson(res) {
   }
 }
 
-export async function getData(category) {
+export async function getProductsByCategory(category) {
   const response = await fetch(baseUrl +`products/search/${category}`);
   const data = await convertToJson(response);
   return data.Result;
@@ -28,5 +28,5 @@ export async function checkout(payload) {
     },
     body: JSON.stringify(payload),
   };
-  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+  return await fetch(baseUrl + "checkout/", options).then(convertToJson);
 }
