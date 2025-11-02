@@ -1,4 +1,4 @@
-import { findProductById } from "./productData.mjs";
+import { findProductById } from "./externalServices.mjs";
 import { getParam } from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
 import addProductToCart from "./productDetails.mjs";
@@ -20,15 +20,14 @@ function triggerCartAnimation() {
 }
 
 // add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await findProductById(e.target.dataset.id);
-  addProductToCart(product);
-  triggerCartAnimation();
-}
+//async function addToCartHandler(e) {
+//  const product = await findProductById(e.target.dataset.id);
+//  addProductToCart(product);
+//}
 
 // add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+//document
+//  .getElementById("addToCart")
+//  .addEventListener("click", addToCartHandler);
 
 loadHeaderFooter();
