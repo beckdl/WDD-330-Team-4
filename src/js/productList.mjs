@@ -4,6 +4,9 @@ import { renderListWithTemplate } from "./utils.mjs";
 function productCardTemplate(product) {
   return `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
+    <p class="product-card__discount ${
+      productDiscount(product) ? "" : "hide"
+    }">${productDiscount(product) ? `-${productDiscount(product)}%` : ""}</p>
     <img
       src="${product.Images.PrimaryMedium}"
       alt="Image of ${product.Name}"
@@ -29,3 +32,15 @@ export default async function productList(selector, category){
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 }
+
+function productDiscount (product) {
+  if (product.SuggestedRetailPrice > product.FinalPrice) {
+    const retailPrice = product.SuggestedRetailPrice;
+    const finalPrice = product.FinalPrice;
+    const discount = Math.round(((retailPrice - finalPrice) / retailPrice) * 100);
+    return discount;
+  }
+}
+
+
+  

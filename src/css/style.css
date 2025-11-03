@@ -161,11 +161,24 @@ button {
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
+
 }
 .product-list a {
   text-decoration: none;
   color: var(--dark-grey);
 }
+
+.product-card__discount {
+  position: absolute;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+  padding: 0.2em 0.5em;
+  font-size: var(--small-font);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
@@ -173,6 +186,7 @@ button {
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
+  position: relative;
 }
 .product-card h2,
 .product-card h3,
