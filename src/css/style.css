@@ -189,6 +189,28 @@ button {
 }
 /* End product list card */
 
+.list-total {
+  text-align: right;
+}
+.list-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5em;
+}
+.list-footer > a {
+  /* display: block; */
+  padding: 0.3em 0.5em;
+  background-color: var(--primary-color);
+  text-decoration: none;
+  border-radius: 5px;
+}
+.list-footer a:link,
+.list-footer a:visited {
+  color: var(--dark-grey);
+}
+
+
 /* checkout styles */
 .checkout-form {
   padding: 0.5em;
@@ -280,4 +302,8 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+.hide {
+  display: none;
 }
