@@ -304,6 +304,11 @@ footer {
   padding: 1em;
 }
 
+.product-not-found {
+  text-align: center;
+  font-size: 1.2em;
+}
+
 .hide {
   display: none;
 }
