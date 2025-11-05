@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
 
 
@@ -91,6 +91,7 @@ const checkoutProcess = {
       setLocalStorage("so-cart", []);
       window.location.href = "../checkout/success.html";
     } catch (err) {
+      removeAllAlerts();
       for (let message in err.message) {
         alertMessage(err.message[message]);
       }
