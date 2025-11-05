@@ -179,6 +179,23 @@ button {
   z-index: 1;
 }
 
+/* alert styles */
+.alert-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+}
+.alert-message > p {
+  margin: 0;
+}
+.alert-message > span {
+  cursor: pointer;
+  font-weight: bold;
+}
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
