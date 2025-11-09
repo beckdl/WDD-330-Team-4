@@ -1,6 +1,5 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
-import { checkout } from "./src/js/externalServices.mjs";
 
 let __dirname = "";
 
