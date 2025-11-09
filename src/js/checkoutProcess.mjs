@@ -89,7 +89,7 @@ const checkoutProcess = {
       const res = await checkout(json);
       console.log(res);
       setLocalStorage("so-cart", []);
-      window.location.href = "/success.html";
+      location.assign("/checkout/success.html");
     } catch (err) {
       removeAllAlerts();
       for (let message in err.message) {
