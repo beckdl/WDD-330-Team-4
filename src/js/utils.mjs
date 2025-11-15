@@ -76,7 +76,7 @@ export async function loadHeaderFooter() {
   const headerEl = document.querySelector("#main-header");
   const footerTemplateFn = loadTemplate("../partials/footer.html");
   const footerEl = document.querySelector("#main-footer");
-  renderWithTemplate(headerTemplateFn, headerEl);
+  await renderWithTemplate(headerTemplateFn, headerEl, null, () => updateCartCount(false));
   renderWithTemplate(footerTemplateFn, footerEl);
 }
 
@@ -100,4 +100,27 @@ export function alertMessage(message, scroll = true, duration = 3000) {
 export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".alert-message");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+}
+
+export function updateCartCount(animate = false) {
+  const cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+  const countElement = document.querySelector("#cart-count");
+
+  if (!countElement) return;
+
+  const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+  if (totalItems > 0) {
+    countElement.textContent = totalItems;
+    countElement.style.display = "inline-block";
+  } else {
+    countElement.style.display = "none";
+  }
+
+  // 🔥 Trigger animation
+  if (animate) {
+    countElement.classList.remove("cart-bump"); // reset if already animating
+    void countElement.offsetWidth; // force reflow so animation restarts
+    countElement.classList.add("cart-bump");
+  }
 }
