@@ -3,6 +3,7 @@ import { getLocalStorage, renderListWithTemplate } from "./utils.mjs";
 
 export function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
+  <button class="cart-remove" data-id="${item.Id}">X</button>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Images.PrimaryMedium}"
@@ -22,25 +23,35 @@ export function cartItemTemplate(item) {
 
 export function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
+  const el = document.querySelector(".product-list");
+
   if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
-    document.querySelector(".product-list").innerHTML =
-      "<p>Your cart is empty</p>";
-    const total = calculateListTotal(cartItems);
-    displayCartTotal(total);
+    el.innerHTML = "<p>Your cart is empty</p>";
+    displayCartTotal(0);
     return;
   }
-  const el = document.querySelector(".product-list")
+
   renderListWithTemplate(cartItemTemplate, el, cartItems);
-  
+
+  // Attach remove listeners
+  const removeButtons = el.querySelectorAll(".cart-remove");
+  removeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      removeCartItem(id);
+    });
+  });
+
   const total = calculateListTotal(cartItems);
   displayCartTotal(total);
 }
+
 
 function displayCartTotal(total) {
   if (total > 0) {
     // show our checkout button and total if there are items in the cart.
     document.querySelector(".list-footer").classList.remove("hide");
-    document.querySelector(".list-total").innerText += ` $${total}`;
+    document.querySelector(".list-total").innerText = `Total: $${total}`;
   } else {
     document.querySelector(".list-footer").classList.add("hide");
   }
@@ -54,4 +65,11 @@ function calculateListTotal(list) {
     const total = amounts.reduce((sum, item) => sum + item, 0);
     return total;
   }
+}
+
+function removeCartItem(id) {
+  let cartItems = getLocalStorage("so-cart") || [];
+  cartItems = cartItems.filter(item => item.Id != id); // remove the clicked item
+  localStorage.setItem("so-cart", JSON.stringify(cartItems)); // update storage
+  renderCartContents(); // re-render cart
 }
