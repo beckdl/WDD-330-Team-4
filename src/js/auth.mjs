@@ -50,7 +50,7 @@ export async function login(creds, redirect = "/") {
   try {
     const token = await loginRequest(creds);
     setLocalStorage(tokenKey, token);
-    window.location = redirect;
+    location.assign(redirect);
   } catch (err) {
     alertMessage(err.message.message);
   }
