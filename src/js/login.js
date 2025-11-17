@@ -2,7 +2,7 @@ import { login } from "./auth.mjs";
 import { getParam, loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
-const redirect = getParam("redirect");
+const redirect = getParam("redirect") ?? "../index.html";
 
 document.querySelector("#loginButton").addEventListener("click", (e) => {
   const email = document.querySelector("#email").value;
