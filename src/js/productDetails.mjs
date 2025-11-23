@@ -24,6 +24,12 @@ export async function addProductToCart(product) {
       setLocalStorage("so-cart", [product]);
       return;
     }
+    const existingItem = currentCart.find(item => item.Id === product.Id);
+    if (existingItem) {
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+      setLocalStorage("so-cart", currentCart);
+      return;
+    }
     currentCart.push(product);
     setLocalStorage("so-cart", currentCart);
 }
