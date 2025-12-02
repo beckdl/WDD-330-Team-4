@@ -25,6 +25,14 @@ export default async function productList(selector, category){
     console.log(products);
     //render out the product list to the element 
     renderListWithTemplate(productCardTemplate, el, products);
+
+      // Listen for sort changes
+    const sortSelect = document.getElementById("sort-products");
+    sortSelect.addEventListener("change", (e) => {
+      const sortedProducts = sortProducts(products, e.target.value);
+      renderListWithTemplate(productCardTemplate, el, sortedProducts);
+    });
+
     document.querySelector(".title").innerHTML = category
       .replaceAll("-", " ")
       .trim()
@@ -42,5 +50,19 @@ function productDiscount (product) {
   }
 }
 
-
+function sortProducts(products, sortType) {
+  const sorted = [...products];
+  switch (sortType) {
+    case "name-asc":
+      return sorted.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+    case "name-desc":
+      return sorted.sort((a, b) => b.NameWithoutBrand.localeCompare(a.NameWithoutBrand));
+    case "price-asc":
+      return sorted.sort((a, b) => a.FinalPrice - b.FinalPrice);
+    case "price-desc":
+      return sorted.sort((a, b) => b.FinalPrice - a.FinalPrice);
+    default:
+      return sorted;
+  }
+}
   
