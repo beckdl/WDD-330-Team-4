@@ -297,6 +297,31 @@ button {
   font-size: 1em;
 }
 
+.quantity-btn {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  color: #333;
+  font-size: var(--font-base);
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.quantity-btn:hover {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.quantity-number {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
 /* Start product detail styles */
 .product-detail {
   padding: 1em;
