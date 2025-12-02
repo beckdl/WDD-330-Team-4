@@ -1,5 +1,6 @@
 import { findProductById } from "./externalServices.mjs";
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { updateCartCount } from "./utils.mjs";
 
 let product = {};
 
@@ -26,6 +27,8 @@ export async function addProductToCart(product) {
     }
     currentCart.push(product);
     setLocalStorage("so-cart", currentCart);
+    //update the cart count icon, animate it
+    updateCartCount(true);
 }
 
 function renderProductDetails() {
