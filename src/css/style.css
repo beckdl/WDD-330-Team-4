@@ -208,6 +208,28 @@ button {
   z-index: 1;
 }
 
+.product-details__discount {
+  position: absolute;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+  padding: 0.2em 0.5em;
+  font-size: var(--large-font);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.product-detail__image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.retailDiscount {
+  text-decoration: line-through;
+  color: red;
+}
+
 /* alert styles */
 .alert-message {
   display: flex;
