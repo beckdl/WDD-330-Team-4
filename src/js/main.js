@@ -1,3 +1,5 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, showRegistrationPrompt } from "./utils.mjs";
 
 loadHeaderFooter();
+
+showRegistrationPrompt();
