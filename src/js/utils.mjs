@@ -123,3 +123,26 @@ export function updateCartCount(animate = false) {
     countElement.classList.add("cart-bump");
   }
 }
+
+export function showRegistrationPrompt() {
+    const hasVisited = localStorage.getItem('hasVisited');
+    
+    if (!hasVisited) {
+        const modal = document.querySelector("#modal");
+        modal.classList.remove("hide");
+        modal.innerHTML = `
+            <div class="modal-content">
+                <h2>Welcome!</h2>
+                <p><a href="#" class="register-btn">Register</a> today and get your very own Sleep Outside water bottle.</p>
+                <button class="close-btn">&times;</button>
+                
+            </div>
+        `;
+        
+        localStorage.setItem("hasVisited", "true");
+        
+        modal.querySelector(".close-btn").addEventListener("click", () => {
+            modal.classList.add("hide");
+        });
+    }
+}
