@@ -41,12 +41,42 @@ function renderProductDetails() {
     document.querySelector("#productName").innerText = product.Brand.Name;
     document.querySelector("#productNameWithoutBrand").innerText =
       product.NameWithoutBrand;
-    document.querySelector("#productImage").src = product.Images.PrimaryLarge;
-    document.querySelector("#productImage").alt = product.Name;
-    document.querySelector("#productFinalPrice").innerText = 
-    "$" + product.FinalPrice;
-    document.querySelector("#productColorName").innerText =
-      product.Colors[0].ColorName;
+
+    const mainImage = document.querySelector("#productImage");
+
+    // show the first color by default
+    let selectedColor = product.Colors[0];
+    mainImage.src = selectedColor.ColorPreviewImageSrc || product.Images.PrimaryLarge;
+    mainImage.alt = `${product.Name} - ${selectedColor.ColorName}`;
+    document.querySelector("#productFinalPrice").innerText = `$${product.FinalPrice}`;
+    document.querySelector("#productColorName").innerText = selectedColor.ColorName;
+  
+    // render color swatches
+    const colorContainer = document.querySelector("#productColorOptions");
+    colorContainer.innerHTML = ""; // clear existing
+  
+    product.Colors.forEach((color, index) => {
+      const swatch = document.createElement("img");
+      swatch.src = color.ColorChipImageSrc; // small swatch image
+      swatch.alt = color.ColorName;
+      swatch.className = "color-swatch" + (index === 0 ? " selected" : "");
+      swatch.dataset.index = index;
+  
+      // click handler to select color
+      swatch.addEventListener("click", () => {
+        selectedColor = color;
+        mainImage.src = color.ColorPreviewImageSrc;
+        mainImage.alt = `${product.Name} - ${color.ColorName}`;
+        document.querySelector("#productColorName").innerText = color.ColorName;
+  
+        // update selected class
+        colorContainer.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("selected"));
+        swatch.classList.add("selected");
+      });
+  
+      colorContainer.appendChild(swatch);
+    });
+  
     document.querySelector("#productDescriptionHtmlSimple").innerHTML =
       product.DescriptionHtmlSimple;
     document.querySelector("#addToCart").dataset.id = product.Id;

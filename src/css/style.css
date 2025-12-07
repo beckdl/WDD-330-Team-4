@@ -355,6 +355,25 @@ button {
   width: 100%;
 }
 
+.product__color-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.product__color-options .color-swatch {
+  width: 30px;
+  height: 30px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.color-swatch.selected {
+  border-color: #333; /* highlight selected swatch */
+}
+
 /*Cart card styles*/
 .cart-card {
   position: relative;
