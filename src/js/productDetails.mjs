@@ -80,4 +80,13 @@ function renderProductDetails() {
     document.querySelector("#productDescriptionHtmlSimple").innerHTML =
       product.DescriptionHtmlSimple;
     document.querySelector("#addToCart").dataset.id = product.Id;
+    if (product.SuggestedRetailPrice > product.FinalPrice) {
+      const retailPrice = product.SuggestedRetailPrice;
+      const finalPrice = product.FinalPrice;
+      const discount = Math.round(((retailPrice - finalPrice) / retailPrice) * 100);
+      document.querySelector("#discount").classList.remove("hide");
+      document.querySelector("#discount").innerText = `-${discount}%`;
+      document.querySelector("#productFinalPrice").innerHTML = 
+    `<span class="retailDiscount">($${retailPrice})</span> $${product.FinalPrice}`;
+    }
 }
