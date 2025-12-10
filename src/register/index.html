@@ -3,32 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleep Outside | Home</title>
+    <title>Sleep Outside | Register</title>
     <link rel="stylesheet" href="/css/style.css" />
 
-    <script type="module" src="../js/login.js"></script>
+    <script type="module" src="../js/register.js"></script>
   </head>
   <body>
     <header class="divider" id="main-header"></header>
     <main class="divider">
-      <fieldset class="login-form">
-        <legend>Login</legend>
+      <fieldset class="register-form">
+        <legend>Register</legend>
+        <p>
+            <label for="name">Name</label>
+            <input type="text" placeholder="name" id="name" value=""/>
+        </p>
+        <p>
+            <label for="address">Address</label>
+            <input type="text" placeholder="address" id="address" value=""/>
+        </p>
         <p>
           <label for="email">Email</label>
-          <input
-            type="text"
-            placeholder="email"
-            id="email"
-            value="user1@email.com"
+          <input type="text" placeholder="email" id="email" value=""
           />
         </p>
         <p>
           <label for="password">Password</label>
           <input type="password" placeholder="password" id="password" value=""/>
         </p>
-        <button type="submit" id="loginButton">Login</button>
+        <button type="submit" id="registerButton">Register</button>
       </fieldset>
-      <p class="register-tag">Don't have an account yet?  <a href="../register/index.html" title="Register Today!">Register Here</a>!</p>
     </main>
     <footer id="main-footer"></footer>
   </body>
