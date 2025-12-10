@@ -133,7 +133,7 @@ export function showRegistrationPrompt() {
         modal.innerHTML = `
             <div class="modal-content">
                 <h2>Welcome!</h2>
-                <p><a href="#" class="register-btn">Register</a> today and get your very own Sleep Outside water bottle.</p>
+                <p><a href="../register/index.html" class="register-btn">Register</a> today and get your very own Sleep Outside water bottle.</p>
                 <button class="close-btn">&times;</button>
                 
             </div>
