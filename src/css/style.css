@@ -81,6 +81,34 @@ header {
   color: var(--tertiary-color);
 }
 
+.newsletter {
+  text-align: center;
+  padding: 1em;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+}
+
+.newsletter input[type="email"] {
+  padding: 0.5em;
+  font-size: var(--font-base);
+  width: 250px;
+  max-width: 80%;
+  margin-right: 0.5em;
+  border: 1px solid var(--light-grey);
+  border-radius: 25px;
+}
+
+.newsletter button {
+  margin-top: 1em;
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  border: 0;
+  font-size: var(--font-base);
+  cursor: pointer;
+  border-radius: 10px;
+}
+
 button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
