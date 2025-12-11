@@ -1,4 +1,4 @@
-import { loadHeaderFooter, showRegistrationPrompt, customAlertMessage } from "./utils.mjs";
+import { alertMessage, loadHeaderFooter, showRegistrationPrompt, customAlertMessage } from "./utils.mjs";
 
 loadHeaderFooter();
 
@@ -7,3 +7,15 @@ loadHeaderFooter();
 //customAlertMessage();
 
 showRegistrationPrompt();
+
+const newsLetterBtn = document.querySelector("#newsletter-button");
+
+newsLetterBtn.addEventListener("click", e => {
+  e.preventDefault();
+  const email = document.querySelector("#email");
+  if (!email.value) {
+    return;
+  }
+  alertMessage("Thank you for subscribing to our newsletter!");
+  email.value = "";
+});
