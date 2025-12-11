@@ -96,6 +96,36 @@ export function alertMessage(message, scroll = true, duration = 3000) {
     window.scrollTo(0, 0);
 } 
 
+export function customAlertMessage(scroll = true, duration = 3000) {
+  const messageDoc = fetch('../json/alerts.json')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(alert => {
+        createAlert(alert.message, alert.background, alert.color);
+      });
+    })
+    .catch(error => console.error('Error fetching alert messages:', error));
+  function createAlert(message, background, color) {
+
+    const alertEl = document.createElement("div");
+    alertEl.classList.add("alert-message");
+    alertEl.innerHTML = `<p>${message}</p><span>X</span>`;
+    alertEl.style.background = background;
+    alertEl.style.color = color;
+
+    alertEl.addEventListener("click", function (e) {
+      if (e.target.tagName === "SPAN") {
+        main.removeChild(this);
+      }
+    })
+    const main = document.querySelector("main");
+    main.prepend(alertEl);
+
+    if (scroll) 
+      window.scrollTo(0, 0);
+  }
+} 
+
 export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".alert-message");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
@@ -133,7 +163,7 @@ export function showRegistrationPrompt() {
         modal.innerHTML = `
             <div class="modal-content">
                 <h2>Welcome!</h2>
-                <p><a href="#" class="register-btn">Register</a> today and get your very own Sleep Outside water bottle.</p>
+                <p><a href="../register/index.html" class="register-btn">Register</a> today and get your very own Sleep Outside water bottle.</p>
                 <button class="close-btn">&times;</button>
                 
             </div>

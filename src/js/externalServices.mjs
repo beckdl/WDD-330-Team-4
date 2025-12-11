@@ -44,6 +44,18 @@ export async function loginRequest(user) {
   return response.accessToken;
 }
 
+export async function register(user) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  };
+  const response = await fetch(baseUrl + "/users", options).then(convertToJson);
+  return response;
+}
+
 export async function getOrders(token) {
   const options = {
     method: "GET",
