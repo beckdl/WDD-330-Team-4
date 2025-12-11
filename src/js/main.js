@@ -5,10 +5,13 @@ loadHeaderFooter();
 showRegistrationPrompt();
 
 const newsLetterBtn = document.querySelector("#newsletter-button");
-newsLetterBtn.addEventListener("click", (e) => {
-  const email = document.querySelector("#email").value;
-  if (!email) {
+
+newsLetterBtn.addEventListener("click", e => {
+  e.preventDefault();
+  const email = document.querySelector("#email");
+  if (!email.value) {
     return;
   }
   alertMessage("Thank you for subscribing to our newsletter!");
+  email.value = "";
 });
