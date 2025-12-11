@@ -30,6 +30,28 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+.account-button{
+  text-decoration: none;
+  color: var(--dark-grey);
+  font-size: var(--large-font);
+  margin-left: 1em;
+  background-color: var(--primary-color);
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+}
+
+.register-tag {
+  text-align: center;
+  margin-top: 1em;
+  font-size: var(--font-base);
+}
+
+.register-tag a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
 .logo {
   line-height: 60px;
   width: 245px;
