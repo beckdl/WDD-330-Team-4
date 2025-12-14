@@ -46,8 +46,14 @@ function renderProductDetails() {
 
     // show the first color by default
     let selectedColor = product.Colors[0];
-    mainImage.src = selectedColor.ColorPreviewImageSrc || product.Images.PrimaryLarge;
-    mainImage.alt = `${product.Name} - ${selectedColor.ColorName}`;
+
+    // use responsive primary image
+    setResponsivePrimaryImage(
+      mainImage,
+      product,
+      `${product.Name} - ${selectedColor.ColorName}`
+    );
+
     document.querySelector("#productFinalPrice").innerText = `$${product.FinalPrice}`;
     document.querySelector("#productColorName").innerText = selectedColor.ColorName;
   
@@ -66,6 +72,8 @@ function renderProductDetails() {
       swatch.addEventListener("click", () => {
         selectedColor = color;
         mainImage.src = color.ColorPreviewImageSrc;
+        mainImage.removeAttribute("srcset");
+        mainImage.removeAttribute("sizes");
         mainImage.alt = `${product.Name} - ${color.ColorName}`;
         document.querySelector("#productColorName").innerText = color.ColorName;
   
@@ -89,4 +97,18 @@ function renderProductDetails() {
       document.querySelector("#productFinalPrice").innerHTML = 
     `<span class="retailDiscount">($${retailPrice})</span> $${product.FinalPrice}`;
     }
+}
+
+function setResponsivePrimaryImage(img, product, altText) {
+  const images = product.Images;
+
+  img.src = images.PrimaryLarge; // fallback
+  img.srcset = `
+    ${images.PrimarySmall} 80w,
+    ${images.PrimaryMedium} 160w,
+    ${images.PrimaryLarge} 320w,
+    ${images.PrimaryExtraLarge} 600w
+  `;
+  img.sizes = "(max-width: 600px) 90vw, 400px";
+  img.alt = altText;
 }
