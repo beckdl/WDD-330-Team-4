@@ -1,5 +1,5 @@
 import { getProductsByCategory } from './externalServices.mjs';
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, formatCategoryLabel, setLocalStorage, LAST_CATEGORY_KEY } from "./utils.mjs";
 
 function productCardTemplate(product) {
   return `<li class="product-card">
@@ -33,12 +33,13 @@ export default async function productList(selector, category){
       renderListWithTemplate(productCardTemplate, el, sortedProducts);
     });
 
-    document.querySelector(".title").innerHTML = category
-      .replaceAll("-", " ")
-      .trim()
-      .split(/\s+/)
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+    const formattedCategory = formatCategoryLabel(category);
+    document.querySelector(".title").textContent = formattedCategory;
+    setLocalStorage(LAST_CATEGORY_KEY, { slug: category, label: formattedCategory });
+    return {
+      categoryLabel: formattedCategory,
+      productCount: products.length
+    };
 }
 
 function productDiscount (product) {
@@ -65,4 +66,3 @@ function sortProducts(products, sortType) {
       return sorted;
   }
 }
-  
