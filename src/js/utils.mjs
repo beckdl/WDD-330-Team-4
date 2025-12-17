@@ -13,6 +13,9 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+export const LAST_CATEGORY_KEY = "so-last-category";
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -77,6 +80,28 @@ export async function loadHeaderFooter() {
   const footerEl = document.querySelector("#main-footer");
   await renderWithTemplate(headerTemplateFn, headerEl, null, () => updateCartCount(false));
   renderWithTemplate(footerTemplateFn, footerEl);
+}
+
+export function formatCategoryLabel(category = "") {
+  if (!category) return "";
+  return category
+    .replaceAll("-", " ")
+    .trim()
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+export function updateBreadcrumb(text) {
+  const breadcrumbEl = document.querySelector("#breadcrumb");
+  if (!breadcrumbEl) return;
+  if (!text) {
+    breadcrumbEl.textContent = "";
+    breadcrumbEl.classList.add("hide");
+    return;
+  }
+  breadcrumbEl.textContent = text;
+  breadcrumbEl.classList.remove("hide");
 }
 
 export function alertMessage(message, scroll = true, duration = 3000) {

@@ -1,6 +1,6 @@
 import { getParam } from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, getLocalStorage, LAST_CATEGORY_KEY, updateBreadcrumb } from "./utils.mjs";
 
 const productId = getParam("product");
 productDetails(productId);
@@ -16,4 +16,9 @@ productDetails(productId);
 //  .getElementById("addToCart")
 //  .addEventListener("click", addToCartHandler);
 
-loadHeaderFooter();
+loadHeaderFooter().then(() => {
+  const lastCategory = getLocalStorage(LAST_CATEGORY_KEY);
+  if (lastCategory?.label) {
+    updateBreadcrumb(lastCategory.label);
+  }
+});
